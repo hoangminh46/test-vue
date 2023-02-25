@@ -1,0 +1,13 @@
+.header{
+    padding: 0 50px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: rgba($color: #473c3c, $alpha: 0.5);
+    .header-link{
+        font-size: 20px;
+        
+    }
+}
