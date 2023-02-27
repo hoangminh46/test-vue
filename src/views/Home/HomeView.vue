@@ -1,6 +1,7 @@
 <script>
 import './HomeView.scss'
 import MenuItemView from '../../components/MenuItem/MenuItemView.vue'
+import EditModalView from '../../components/EditModal/EditModalView.vue'
 
 const users = [
   { name: 'minh', age: 20 },
@@ -8,7 +9,8 @@ const users = [
   { name: 'nam', age: 21 }
 ]
 
-const isShow = true
+const isShowData = true
+const isShowModal = false
 const inputAgeValue = ''
 const inputNameValue = ''
 
@@ -16,16 +18,17 @@ export default {
   data() {
     return {
       users,
-      isShow,
+      isShowData,
+      isShowModal,
       inputNameValue,
       inputAgeValue
     }
   },
   methods: {
     handleShowData() {
-      this.isShow = !this.isShow
+      this.isShowData = !this.isShowData
     },
-    handleDeleteData(id) {
+    handleDeleteUser(id) {
       this.users.splice(id, 1)
       console.log(this.users)
     },
@@ -36,39 +39,37 @@ export default {
       }
       this.users.push(newDataUser)
       console.log(this.users)
+    },
+    handleEditUser (user){
+        this.isShowModal = !this.isShowModal
+        console.log(user)
     }
   },
   components: {
-    MenuItemView
-  }
+    MenuItemView,
+    EditModalView
+    }
 }
+
 </script>
 
 <template>
   <div class="home">
-    <button @click="handleShowData" class="btn-show">Show data</button>
-    <input type="text" v-model="inputNameValue" placeholder="Nhập tên" />
-    <input type="text" v-model.number="inputAgeValue" placeholder="Nhập tuổi" />
-    {{ inputNameValue }}
-    {{ inputAgeValue }}
-    <button class="add-btn" @click="handleAddUser(inputNameValue, inputAgeValue)">Thêm</button>
-    <div class="user-data" v-if="isShow">
-      <div class="user-item" v-for="(user, index) in users" :key="index">
-        <div class="user-name">Ten: {{ user.name }}</div>
-        <div class="user-age">Tuoi: {{ user.age }}</div>
-        <button class="btn-delete" @click="handleDeleteData(index)">Delete</button>
-      </div>
+    <button @click="handleShowData" class="btn-show">Hiển thị dữ liệu</button>
+    <div class="add-user" v-if="isShowData">
+        <p>Thêm user</p>
+        <input type="text" v-model="inputNameValue" placeholder="Nhập tên" />
+        <input type="text" v-model.number="inputAgeValue" placeholder="Nhập tuổi" />
+        <button class="add-btn" @click="handleAddUser(inputNameValue, inputAgeValue)">Thêm</button>
     </div>
-    <!-- <div class="list-item">
-      <Teleport to="body">
+    <div class="user-data" v-if="isShowData">
         <MenuItemView
           v-for="(user, index) in users"
-          :key="index"
           :datas="user"
-          title-test="xin chaoo"
-          theme="light"
+          @delete-user="handleDeleteUser"
+          @edit-user="handleEditUser(user)"
         />
-      </Teleport>
-    </div> -->
+    </div>
+    <EditModalView v-if="isShowModal"/>
   </div>
 </template>

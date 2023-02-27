@@ -1,3 +1,15 @@
-.item.bg-theme{
-    background-color: #ff3232;
+.item{
+    background: #a6ebf7;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    .item-data{
+        display: flex;
+        gap: 10px;
+    }
+    .item-action{
+        display: flex;
+        gap: 10px;
+    }
 }

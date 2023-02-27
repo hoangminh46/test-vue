@@ -2,6 +2,25 @@
     .btn-show{
         margin: 30px 0;
     }
+    .add-user{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 400px;
+        background-color: #ccc;
+        margin:  30px auto;
+        p{
+            font-size: 20px;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+        button{
+            width: 100px;
+            margin: 0 auto;
+        }
+    }
     .user-data{
         display: flex;
         flex-direction: column;
